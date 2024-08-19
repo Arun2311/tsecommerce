@@ -1,4 +1,3 @@
-// src/components/Signup.tsx
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
