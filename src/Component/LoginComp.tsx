@@ -55,7 +55,6 @@ const LoginComp: React.FC = () => {
         </button>
 
 
-        {/* navigate */}
 
         <p className="text-center mt-5">
           Don't  have an account?{' '}
