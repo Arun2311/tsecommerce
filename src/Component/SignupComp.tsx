@@ -6,19 +6,21 @@ import { useNavigate } from 'react-router-dom';
 interface SignupForm {
   name: string;
   age: number;
-  phone: string;
+  phone: Number;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
 const SignupComp: React.FC = () => {
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm<SignupForm>();
+
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<SignupForm> = (data) => {
@@ -30,7 +32,7 @@ const SignupComp: React.FC = () => {
   const password = watch('password');
 
   return (
-    <div className="container signup-container">
+    <div className="container signup-container col-4 mt-5">
       <h2 className="text-center">Signup</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
         <div className="form-group mt-3">
@@ -129,6 +131,7 @@ const SignupComp: React.FC = () => {
             Login here
           </button>
         </p>
+        
       </form>
     </div>
   );

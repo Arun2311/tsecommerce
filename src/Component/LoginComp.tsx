@@ -10,15 +10,18 @@ type LoginForm = {
 
 const LoginComp: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginForm> = (data) => {
     console.log('Formdata', data);
+
+
+    navigate("/home")
   };
-  const navigate = useNavigate();
 
 
   return (
-    <div className="container login-container">
+    <div className="container login-container col-4 mt-5">
       <h2 className="text-center">Login</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="login-form">
 
