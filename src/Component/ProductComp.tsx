@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CartContext } from "../Context/CartContext";
-
+// import { CartContext } from "../Context/CartContext";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/slice/CartSlice";
 
 interface Product {
   id: number;
@@ -21,15 +22,14 @@ interface Product {
 //   };
 
 const ProductComp: React.FC = () => {
-    const cartContext  = useContext(CartContext);
+  // const cartContext  = useContext(CartContext);
 
   const [products, setProducts] = useState<Product[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     handlefetch();
   }, []);
-
-
 
   const handlefetch: () => Promise<void> = async () => {
     try {
@@ -43,13 +43,18 @@ const ProductComp: React.FC = () => {
     }
   };
 
-  const handleAddToCart = (product: Product) => {
-    cartContext?.addToCart({
-      id: product.id,
-      title: product.title,
-      image: product.image,
-      description: product.description,
-    });
+  // context
+  // const handleAddToCart = (product: Product) => {
+  //   cartContext?.addToCart({
+  //     id: product.id,
+  //     title: product.title,
+  //     image: product.image,
+  //     description: product.description,
+  //   });
+  // };
+
+  const handleAddToCart = (product: Omit<Product, "price">) => {
+    dispatch(addToCart(product));
   };
 
   return (
@@ -68,7 +73,12 @@ const ProductComp: React.FC = () => {
               <p className="card-text">
                 {product.description.substring(0, 100)}
               </p>
-              <a onClick={() => handleAddToCart(product)} className="btn btn-primary">Add To Cart</a>
+              <a
+                onClick={() => handleAddToCart(product)}
+                className="btn btn-primary"
+              >
+                Add To Cart
+              </a>
             </div>
           </div>
         ))}

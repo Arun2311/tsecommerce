@@ -4,10 +4,13 @@ import { Navbar as BootstrapNavbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { CartContext } from '../Context/CartContext';
+import { RootState } from '../redux/store';
+import { useSelector } from 'react-redux';
 
 const NavbarComp: React.FC = () => {
+  const totalCount = useSelector((state: RootState) => state.cart.totalCount);
 
-  const cartContext = useContext(CartContext);
+  // const cartContext = useContext(CartContext);
 
   return (
     <BootstrapNavbar bg="dark" variant="dark" expand="lg">
@@ -25,7 +28,10 @@ const NavbarComp: React.FC = () => {
           <Nav>
             <Nav.Link as={Link} to="/cart" className="position-relative">
               <FaShoppingCart size={24} />
-              <span className="cart-count">{cartContext?.totalCount ||0}</span> 
+              {/* <span className="cart-count">{cartContext?.totalCount ||0}</span>  */}
+
+              <span className="cart-count">{totalCount ||0}</span> 
+
             </Nav.Link>
           </Nav>
         </BootstrapNavbar.Collapse>
